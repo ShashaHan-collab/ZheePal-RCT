@@ -21,7 +21,7 @@ This repository contains the statistical analysis and data visualization code an
 * tqdm
 * *(All other modules used, such as `itertools`, are part of the Python Standard Library.)*
 
-– A complete list of Python dependencies can be found in the `System architecture/README.md` file.
+– A list of Python dependencies for `System architecture/` can be found in the `System architecture/README.md` file.
 
 ## Prerequisite R packages
 * dplyr

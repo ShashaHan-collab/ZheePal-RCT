@@ -1,5 +1,6 @@
 library(ggplot2)
 library(cowplot)
+library(dplyr)
 
 load("risk_assessment.RData")
 

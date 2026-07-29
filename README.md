@@ -25,16 +25,14 @@ This repository contains the statistical analysis and data visualization code an
 
 ## Prerequisite R packages
 * dplyr
-* purrr
+* ggbeeswarm
 * glue
-* tidyr
+* tibble
 * ggplot2
-* ggtext
 * cowplot
 * grid
-* grImport2
-* scales
-* plotrix
+* binom
+* ggpattern
 
 
 # Repository Contents

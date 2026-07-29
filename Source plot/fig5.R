@@ -9,7 +9,7 @@ load("fig5.RData")
 ### subfig_main ###
 ###             ###
 plot_main <- function(df, y_label=FALSE, legend=FALSE, y_tick=TRUE) {
-  x_pos = c(0.97, 0.165, 0.33, 1.005, 1.15, 1.33)
+  x_pos = 0.97
   x_delt = 0.03
   y_pos = 90
   y_delt = c(12, 0, -16)
@@ -30,9 +30,9 @@ plot_main <- function(df, y_label=FALSE, legend=FALSE, y_tick=TRUE) {
                       labels = c("ZheePal        ", "No diagnosis        ", "No guidance        ", "No logic")) +
     geom_segment(aes(x = 1.29, xend = 1.29, y = p[4]+3, yend = 34), color = "black", linewidth = 0.5) +
     geom_segment(aes(x = 2.29, xend = 2.29, y = p[8]+3, yend = 34), color = "black", linewidth = 0.5) +
-    geom_segment(aes(y = -3, yend = -3, x = 1-0.45/2-0.15, xend = x_pos[1]+1.1+0.35), color = "black",linewidth=0.5)+
+    geom_segment(aes(y = -3, yend = -3, x = 1-0.45/2-0.15, xend = x_pos+1.1+0.35), color = "black",linewidth=0.5)+
     geom_segment(aes(y = -3, yend = -6, x = 1-0.45/2-0.15, xend = 1-0.45/2-0.15), color = "black",linewidth=0.5)+
-    geom_segment(aes(y = -3, yend = -6, x = x_pos[1]+1.1+0.35, xend = x_pos[1]+1.1+0.35), color = "black",linewidth=0.5)+
+    geom_segment(aes(y = -3, yend = -6, x = x_pos+1.1+0.35, xend = x_pos+1.1+0.35), color = "black",linewidth=0.5)+
     theme_minimal(base_size = 11) +
     theme(
       legend.title = element_blank(),

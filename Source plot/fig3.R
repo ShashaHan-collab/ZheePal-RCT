@@ -5,9 +5,9 @@ library(dplyr)
 
 load("fig3.RData")
 
-###          ###
-### subfig_a ###
-###          ###
+###         ###
+### panel_a ###
+###         ###
 bar_a<-function(D, x_label=FALSE, legend=FALSE, y_label=FALSE){
   level_x <- c(
     "Low" = 1,
@@ -93,17 +93,17 @@ ap <- plot_grid(ay_lab,ap,ncol = 2,rel_widths = c(0.1, 1))
 ap_label <- bar_a(A_cog, legend = TRUE)
 
 
-###          ###
-### subfig_b ###
-###          ###
+###         ###
+### panel_b ###
+###         ###
 plot_b <- function(df_long, dim_name, show_x = FALSE, show_y = FALSE, show_legend = FALSE) {
   p <- ggplot(df_long, aes(x = ZheePal, y = Sel_report, fill = agreement)) +
     geom_tile() +
     geom_text(aes(label = Count), color = "black", size = 11) +
     scale_fill_manual(
       values = c(
-        "agreement"    = "#c99b38",   # Med brown
-        "disagreement" = "#eddca5"    # Light brown
+        "agreement"    = "#c99b38",   
+        "disagreement" = "#eddca5"    
       ),
       labels = c(
         "agreement"    = "Agreement    ",
@@ -167,9 +167,9 @@ bx_lab <- ggdraw() +draw_label("ZheePal",x = 0.6,size = 45,fontface = "plain")
 bp <- plot_grid(bp,bb_label_w, bx_lab,ncol = 1,rel_heights = c(1,0.03, 0.05))
 
 
-###          ###
-### subfig_c ###
-###          ###
+###         ###
+### panel_c ###
+###         ###
 plot_c <- function(df, legend=TRUE){
   df$group <- factor(
     df$group,
@@ -266,9 +266,9 @@ cp <- plot_c(C_df, legend = FALSE)
 cp <- plot_grid(cb_label_w, cy_lab,cb_label_w,cp,ncol = 4,rel_widths = c(0.1, 0.08, 0.04, 1))
 
 
-###          ###
-### subfig_d ###
-###          ###
+###         ###
+### panel_d ###
+###         ###
 geom_boxplot_pub <- function(
     data,
     mapping,
@@ -365,8 +365,6 @@ geom_boxplot_pub <- function(
     )
   )
 }
-
-
 
 plot_p <- function(df, y_scale, x_label=FALSE) {
   y1 = y_scale$lim[1]
@@ -467,9 +465,9 @@ dp <- plot_grid(dp,db_label_w,dx_lab,ncol = 1,rel_heights = c(1, 0.03, 0.05))
 dp <- dp + theme(plot.margin = margin(t = 5, l = 0, b = 0, r = 0))
 
 
-###          ###
-### subfig_e ###
-###          ###
+###         ###
+### panel_e ###
+###         ###
 ep <- ggplot(E_df_long, aes(x = Dimension, y = kappa, group = type)) +
   geom_line(
     aes(color = type),
@@ -550,9 +548,9 @@ ep <- ggplot(E_df_long, aes(x = Dimension, y = kappa, group = type)) +
   )
 
 
-###          ###
-### subfig_f ###
-###          ###
+###         ###
+### panel_f ###
+###         ###
 fp <- ggplot(F_df, aes(x = Reason, y = Proportion)) +
   geom_col(width = 0.82, fill = "#FAD8EC") +
   scale_y_continuous(

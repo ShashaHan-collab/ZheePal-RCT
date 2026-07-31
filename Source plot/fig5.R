@@ -5,9 +5,9 @@ library(ggpattern)
 
 load("fig5.RData")
 
-###             ###
-### subfig_main ###
-###             ###
+###              ###
+### panel_b_main ###
+###              ###
 plot_main <- function(df, y_label=FALSE, legend=FALSE, y_tick=TRUE) {
   x_pos = 0.97
   x_delt = 0.03
@@ -108,9 +108,9 @@ p_main_a <- plot_main(df_ad, y_label=TRUE)
 p_legend1 <- plot_main(df_ad, legend=TRUE)
 
 
-###            ###
-### subfig_sub ###
-###            ###
+###             ###
+### panel_b_sub ###
+###             ###
 plot_sub <- function(df, y_label=FALSE, legend=FALSE, y_tick=TRUE) {
   x_pos = 1.35
   y_pos = 90
@@ -242,9 +242,9 @@ p_sub_am <- plot_sub(sub_df_ad_men, y_label=FALSE)
 p_legend2 <- plot_sub(sub_df_ad_men, legend=TRUE)
 
 
-###             ###
-### subfig_time ###
-###             ###
+###               ###
+### panel_c(time) ###
+###               ###
 p_time <- ggplot(Time_df_long, aes(x = Group, y = Time)) +
   geom_boxplot_pattern(
     aes(

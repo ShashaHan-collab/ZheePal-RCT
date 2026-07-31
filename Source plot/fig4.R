@@ -7,9 +7,9 @@ library(glue)
 
 load("fig4.RData")
 
-###          ###
-### subfig_a ###
-###          ###
+###         ###
+### panel_a ###
+###         ###
 plot_panel_a <- function(df, dim_name,y_label = FALSE,legend = FALSE){
   df <- df %>% filter(dimension == dim_name)
   p <- ggplot(df, aes(x_pos, prop, group = group)) +
@@ -112,9 +112,9 @@ p_legenda2 <- ggplot(legend_items, aes(x = x_tile, y = y_tile)) +
   ylim(0.5, 1.5)
 
 
-###          ###
-### subfig_b ###
-###          ###
+###         ###
+### panel_b ###
+###         ###
 for (key in c("all", "train")){
   prefix <- c("cog", "men")
   suffix <- c("mlow", "mh_h")
@@ -335,9 +335,9 @@ for (key in c("all", "train")){
 }
 
 
-###          ###
-### subfig_c ###
-###          ###
+###         ###
+### panel_c ###
+###         ###
 cp_left <- ggplot(C_df_left_long, aes(x = x_pos, y = Time)) +
   geom_boxplot(
     aes(fill = Group, colour = Group),
@@ -533,9 +533,9 @@ radar(C_df_right_long)
 dev.off()
 
 
-###          ###
-### subfig_d ###
-###          ###
+###         ###
+### panel_d ###
+###         ###
 level_labs_sta <- c(
   "1" = "Very\ndissatisfied",
   "2" = "Dissatisfied",

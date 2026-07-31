@@ -4,7 +4,7 @@ library(cowplot)
 load("fig2.RData")
 
 ###          ###
-### subfig_ab ###
+### panel_ab ###
 ###          ###
 plot_p_ab <- function(df, y_label=FALSE, legend=FALSE, y_tick=TRUE, advice=FALSE) {
   x_pos = 1.35
@@ -112,9 +112,9 @@ plot_p_ab <- function(df, y_label=FALSE, legend=FALSE, y_tick=TRUE, advice=FALSE
   return(p)
 }
 
-###          ###
-### subfig_c ###
-###          ###
+###         ###
+### panel_c ###
+###         ###
 plot_p_c <- function(df, y_label=FALSE, legend=FALSE, y_tick=TRUE) {
   x_pos = 1.35
   y_pos = 65
@@ -176,7 +176,6 @@ plot_p_c <- function(df, y_label=FALSE, legend=FALSE, y_tick=TRUE) {
         linewidth = 0.5,
         inherit.aes = FALSE
       )+
-      # annotate("text",x = 0.5,y = seq(0,100,20),label = seq(0,50,10),hjust = 1, size = 8)
       annotate("text",x = 1.52,y = seq(0,100,20),label = seq(0,50,10),hjust = 0.5, vjust = 1, size = 8)
   }
   

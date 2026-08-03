@@ -3,7 +3,7 @@ library(cowplot)
 library(ggpattern)
 
 
-load("fig5.RData")
+load("Fig. 5.RData")
 
 ###             ###
 ### panel_b_main ###

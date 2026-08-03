@@ -2,7 +2,7 @@ library(ggplot2)
 library(cowplot)
 library(dplyr)
 
-load("risk_assessment.RData")
+load("Supplementary Fig. 1.RData")
 
 bar<-function(D, xlabel, x_label=FALSE){
   colnames(D) <- c("Dimension", "Value")

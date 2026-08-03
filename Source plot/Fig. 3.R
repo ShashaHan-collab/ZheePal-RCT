@@ -3,7 +3,7 @@ library(cowplot)
 library(ggbeeswarm)
 library(dplyr)
 
-load("fig3.RData")
+load("Fig. 3.RData")
 
 ###         ###
 ### panel_a ###

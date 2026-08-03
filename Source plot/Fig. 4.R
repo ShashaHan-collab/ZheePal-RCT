@@ -5,7 +5,7 @@ library(grid)
 library(binom)
 library(glue)
 
-load("fig4.RData")
+load("Fig. 4.RData")
 
 ###          ###
 ### subfig_a ###

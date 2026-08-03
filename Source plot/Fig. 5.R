@@ -6,7 +6,7 @@ library(ggpattern)
 load("fig5.RData")
 
 ###             ###
-### subfig_main ###
+### panel_b_main ###
 ###             ###
 plot_main <- function(df, y_label=FALSE, legend=FALSE, y_tick=TRUE) {
   x_pos = c(0.97, 0.165, 0.33, 1.005, 1.15, 1.33)
@@ -109,7 +109,7 @@ p_legend1 <- plot_main(df_ad, legend=TRUE)
 
 
 ###            ###
-### subfig_sub ###
+### panel_b_sub ###
 ###            ###
 plot_sub <- function(df, y_label=FALSE, legend=FALSE, y_tick=TRUE) {
   x_pos = 1.35
@@ -243,7 +243,7 @@ p_legend2 <- plot_sub(sub_df_ad_men, legend=TRUE)
 
 
 ###             ###
-### subfig_time ###
+### panel_b_time ###
 ###             ###
 p_time <- ggplot(Time_box_stats, aes(x = x_pos)) +
   geom_rect_pattern(

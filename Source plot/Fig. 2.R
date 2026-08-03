@@ -1,7 +1,7 @@
 library(ggplot2)
 library(cowplot)
 
-load("fig2.RData")
+load("Fig. 2.RData")
 
 ###          ###
 ### panel_ab ###

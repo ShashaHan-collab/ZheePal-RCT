@@ -3,7 +3,7 @@ library(ggplot2)
 library(cowplot)
 library(grid)
 
-load("Extended Data Fig2.RData")
+load("Extended Data Fig. 2.RData")
 
 plot_sub <- function(var_name, save_dir = "plot/subfig", x_xlabel=FALSE, y_ylabel=FALSE) {
   df_all <- get(paste0("df_", var_name))

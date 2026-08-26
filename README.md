@@ -50,6 +50,8 @@ Use the data in `Source data/` with the plotting code in `Source plot/` to regen
 ## System architecture
 The `System architecture/`  directory contains the code architecture for an integrated multi-agent system that executes the collaborative diagnostic guidance logic. The architecture is built around a state-based dialogue orchestrator that conducts the diagnosis and guidance process through a collaborative conversational context, supported by three specialized modules: a risk assessment agent, a personalization engine, and a dialogue-monitor agent (Extended Data Fig. 1 in Article). 
 
+A **README file in this directory** provides setup and usage instructions for the demonstration system: install dependencies from requirements.txt, configure the OpenAI-compatible API endpoint and model names in config.py, and launch main.py. The repository also includes illustrative prompt templates and a toy example so that one can test the architecture.
+
 Researchers can reference this structure to understand the collaborative diagnostic guidance logic and to develop equivalent systems via the community-engaged codesign approach described in the Article.
 
 

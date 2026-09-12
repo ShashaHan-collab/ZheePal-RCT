@@ -3,7 +3,7 @@ Example prompt templates in English.
 
 These prompts illustrate the agent roles in SheeZan. They are provided for
 reviewer evaluation and are not direct translations of the production prompts,
-which were written in Chinese and codesigned with stakeholders as described in
+which were written in Chinese and codesigned with community stakeholders as described in
 the Article.
 
 The full production prompt set may include additional local contextual

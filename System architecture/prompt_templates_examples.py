@@ -1,14 +1,13 @@
 """
-Examples, English.
+Example prompt templates in English.
 
-The prompt templates in this file illustrate the agent roles and interaction
-structure used in ZheePal. They are provided in English for reviewer
-evaluation and are not direct translations of the production prompts, which
-were written in Chinese and co-designed with community stakeholders as
-described in the Article.
+These prompts illustrate the agent roles in SheeZan. They are provided for
+reviewer evaluation and are not direct translations of the production prompts,
+which were written in Chinese and codesigned with stakeholders as described in
+the Article.
 
-The full production prompt set may include additional local contextual elements and safety
-constraints.
+The full production prompt set may include additional local contextual
+elements and safety constraints.
 """
 
 from datetime import datetime

@@ -2,7 +2,7 @@
 
 This repository contains the statistical analysis and data visualization code and the agentic system architecture associated with the research project:
 
-> An agentic AI architecture to drive population behavior change for cognitive and mental health
+> An agentic AI architecture to drive population behavior change for cognitive and mental health: a randomized controlled trial
 
 
 # Prerequisites

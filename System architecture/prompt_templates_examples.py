@@ -1,7 +1,7 @@
 """
 Example prompt templates in English.
 
-These prompts illustrate the agent roles in SheeZan. They are provided for
+These prompts illustrate the agent roles in ZheePal. They are provided for
 reviewer evaluation and are not direct translations of the production prompts,
 which were written in Chinese and codesigned with community stakeholders as described in
 the Article.

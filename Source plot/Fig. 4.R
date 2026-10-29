@@ -4,12 +4,14 @@ library(cowplot)
 library(grid)
 library(binom)
 library(glue)
+library(Cairo)
+library(plotrix)
 
-load("Fig. 4.RData")
+load("fig4_itt.RData")
 
-###         ###
-### panel_a ###
-###         ###
+###          ###
+### subfig_a ###
+###          ###
 plot_panel_a <- function(df, dim_name,y_label = FALSE,legend = FALSE){
   df <- df %>% filter(dimension == dim_name)
   p <- ggplot(df, aes(x_pos, prop, group = group)) +
@@ -77,6 +79,7 @@ plot_panel_a <- function(df, dim_name,y_label = FALSE,legend = FALSE){
 
 ap_cognitive <- plot_panel_a(A_df_long, "Cognitive", y_label = TRUE)
 ap_mental    <- plot_panel_a(A_df_long, "Mental")
+print(ap_cognitive)
 legend_labela1 <- ggdraw() +
   draw_grob(
     gridtext::richtext_grob(
@@ -112,9 +115,9 @@ p_legenda2 <- ggplot(legend_items, aes(x = x_tile, y = y_tile)) +
   ylim(0.5, 1.5)
 
 
-##         ###
-## panel_b ###
-##         ###
+##          ###
+## subfig_b ###
+##          ###
 for (key in c("all", "train")){
   prefix <- c("cog", "men")
   suffix <- c("mlow", "mh_h")
@@ -123,7 +126,7 @@ for (key in c("all", "train")){
       varname <- paste0("do_", prefix[i], "_dat_", suffix[j])
       varname0 <- paste0("do_", prefix[i], "_dat0_", suffix[j])
       assign(varname, get(paste0(key, "_", varname)))
-      assign(varname0, get(paste0(key, "_", varname)))
+      assign(varname0, get(paste0(key, "_", varname0)))
     }
   }
 
@@ -331,9 +334,9 @@ for (key in c("all", "train")){
 }
 
 
-###         ###
-### panel_c ###
-###         ###
+###          ###
+### subfig_c ###
+###          ###
 cp_left <- ggplot(C_df_left_box, aes(x = x_pos, group = Group)) +
   geom_rect(
     aes(xmin = x_pos - 0.12, xmax = x_pos + 0.12, ymin = q1, ymax = q3, fill = Group, colour = Group),
@@ -545,9 +548,9 @@ radar(C_df_right_long)
 dev.off()
 
 
-###         ###
-### panel_d ###
-###         ###
+###          ###
+### subfig_d ###
+###          ###
 level_labs_sta <- c(
   "1" = "Very\ndissatisfied",
   "2" = "Dissatisfied",

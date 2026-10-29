@@ -1,10 +1,10 @@
 library(ggplot2)
 library(cowplot)
 
-load("Fig. 2.RData")
+load("fig2_itt.RData")
 
 ###          ###
-### panel_ab ###
+### subfig_ab ###
 ###          ###
 plot_p_ab <- function(df, y_label=FALSE, legend=FALSE, y_tick=TRUE, advice=FALSE) {
   x_pos = 1.35
@@ -43,9 +43,9 @@ plot_p_ab <- function(df, y_label=FALSE, legend=FALSE, y_tick=TRUE, advice=FALSE
     theme(
       legend.title = element_blank(),
       legend.position = if (legend) "top" else "none",
-      legend.text = element_text(size = 22),  
-      legend.key.width  = unit(1.0, "cm"),    
-      legend.key.height = unit(0.8, "cm"),   
+      legend.text = element_text(size = 22),
+      legend.key.width  = unit(1.0, "cm"),
+      legend.key.height = unit(0.8, "cm"),
       panel.grid = element_blank(),
       axis.text.x = element_text(size = 25, color = "black", margin = margin(t = 5)),
       axis.ticks.x = element_blank(),
@@ -64,7 +64,7 @@ plot_p_ab <- function(df, y_label=FALSE, legend=FALSE, y_tick=TRUE, advice=FALSE
     annotate("text",x = x_pos+0.05,y = (df$p[1]+df$p[2])/2,label = paste0('PP ', df$pp[1]), size = 9,fontface = "plain")+
     annotate("text",x = x_pos+1.05,y = (df$p[3]+df$p[4])/2,label = paste0('PP ', df$pp[3]), size = 9,fontface = "plain")+
     coord_cartesian(ylim = c(0, 100),clip = "off")
-  
+
   if (y_tick) {
     p <- p +
       geom_segment(
@@ -86,8 +86,8 @@ plot_p_ab <- function(df, y_label=FALSE, legend=FALSE, y_tick=TRUE, advice=FALSE
       )+
       annotate("text",x = 0.5,y = seq(0,100,20),label = seq(0,100,20),hjust = 1,size = 8)
   }
-  
-  
+
+
   if(legend){
     p <- p+
       geom_errorbar(
@@ -108,13 +108,13 @@ plot_p_ab <- function(df, y_label=FALSE, legend=FALSE, y_tick=TRUE, advice=FALSE
         position = position_dodge(width = 0.45)
       )
   }
-  
+
   return(p)
 }
 
-###         ###
-### panel_c ###
-###         ###
+###          ###
+### subfig_c ###
+###          ###
 plot_p_c <- function(df, y_label=FALSE, legend=FALSE, y_tick=TRUE) {
   x_pos = 1.35
   y_pos = 65
@@ -137,10 +137,10 @@ plot_p_c <- function(df, y_label=FALSE, legend=FALSE, y_tick=TRUE) {
     theme(
       legend.title = element_blank(),
       legend.position = if (legend) "top" else "none",
-      legend.text = element_text(size = 22),  
-      
-      legend.key.width  = unit(1.0, "cm"),    
-      legend.key.height = unit(0.8, "cm"),   
+      legend.text = element_text(size = 22),
+
+      legend.key.width  = unit(1.0, "cm"),
+      legend.key.height = unit(0.8, "cm"),
       panel.grid = element_blank(),
       axis.text.y = element_blank(),
       axis.ticks.y = element_blank(),
@@ -156,7 +156,7 @@ plot_p_c <- function(df, y_label=FALSE, legend=FALSE, y_tick=TRUE) {
     annotate("text",x = 1.68,y = 50,label = "Proportion (%)",size = 9.3,fontface = "plain") +
     annotate("text",x = 0.6,y = 50,label = df$time[1],size = 9,fontface = "plain") +
     coord_flip(clip = "off")
-  
+
   if (y_tick) {
     p <- p +
       geom_segment(
@@ -176,10 +176,11 @@ plot_p_c <- function(df, y_label=FALSE, legend=FALSE, y_tick=TRUE) {
         linewidth = 0.5,
         inherit.aes = FALSE
       )+
+      # annotate("text",x = 0.5,y = seq(0,100,20),label = seq(0,50,10),hjust = 1, size = 8)
       annotate("text",x = 1.52,y = seq(0,100,20),label = seq(0,50,10),hjust = 0.5, vjust = 1, size = 8)
   }
-  
-  
+
+
   if(legend){
     p <- p+
       geom_errorbar(
@@ -200,7 +201,7 @@ plot_p_c <- function(df, y_label=FALSE, legend=FALSE, y_tick=TRUE) {
         position = position_dodge(width = 0.45)
       )
   }
-  
+
   return(p)
 }
 

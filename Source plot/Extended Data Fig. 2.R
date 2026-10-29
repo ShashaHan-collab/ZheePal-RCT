@@ -3,10 +3,12 @@ library(ggplot2)
 library(cowplot)
 library(grid)
 
-load("Extended Data Fig. 2.RData")
+load("subgroup_fig_itt.RData")
 
-plot_sub <- function(var_name, save_dir = "plot/subfig", x_xlabel=FALSE, y_ylabel=FALSE) {
-  df_all <- get(paste0("df_", var_name))
+plot_sub <- function(var_name, week = 2, save_dir = "plot/subfig", x_xlabel = FALSE, y_ylabel = FALSE) {
+  suffix <- if (week == 4) "4" else ""
+  df_name <- paste0("df_", var_name, suffix)
+  df_all <- get(df_name)
   levels <- var_config[[var_name]]
   n_cat <- length(levels(df_all$category))
   if(n_cat == 2){
@@ -51,7 +53,7 @@ plot_sub <- function(var_name, save_dir = "plot/subfig", x_xlabel=FALSE, y_ylabe
     theme_classic() +
     theme(
       axis.text.x = element_blank(),
-      axis.text.y = element_text(size = 16, color = "black", margin = margin(r = -2)),
+      axis.text.y = element_text(size = 16, color = "black", margin = margin(r = 8)),
       axis.title.y = if (y_ylabel) element_text(size = 18, margin = margin(r = 8)) else element_blank(),
       axis.ticks.y  = element_blank(),
       axis.ticks.length = unit(0.5, "lines"),
@@ -63,7 +65,9 @@ plot_sub <- function(var_name, save_dir = "plot/subfig", x_xlabel=FALSE, y_ylabe
       legend.text = element_text(size = 15),
       legend.justification = c(1, 0.5),
       strip.text.x = element_blank(),
-      plot.margin = margin(t = 5, r = 5, b = 40, l = 5)
+      plot.margin = margin(t = 5, r = 5, b = 50, l = 5),
+      panel.background = element_rect(fill = "transparent", colour = NA),
+      plot.background = element_rect(fill = "transparent", colour = NA)
     ) +
     guides(color = guide_legend(ncol = ncol_legend, byrow = TRUE))
   
@@ -84,7 +88,7 @@ plot_sub <- function(var_name, save_dir = "plot/subfig", x_xlabel=FALSE, y_ylabe
   }
   
   if(!dir.exists(save_dir)) dir.create(save_dir, recursive = TRUE)
-  save_path <- file.path(save_dir, paste0(var_name, ".pdf"))
+  save_path <- file.path(save_dir, paste0(var_name, "_", week, ".pdf"))
   ggsave(save_path, plot = p, width = 5, height = 3.5, device = cairo_pdf, family = "Aptos", bg = "transparent")
   
   
@@ -168,19 +172,19 @@ var_config <- list(
   )
 )
 
-xy_var = c()
-x_var = c("income", "live", "edu", "job")
-y_var = c()
+xy_var <- c()
+x_var <- c("income", "live", "edu", "job")
+y_var <- c()
 
-for (var in names(var_config)) {
-  if (var %in%  x_var){
-    plot_sub(var, x_xlabel=TRUE)
-  } else if (var %in% y_var) {
-    plot_sub(var, y_ylabel = TRUE)
-  } else if (var %in% xy_var) {
-    plot_sub(var, x_xlabel=TRUE, y_ylabel = TRUE)
-  } else {
-    plot_sub(var)
+for (week in c(2, 4)) {
+  for (var in names(var_config)) {
+    plot_sub(
+      var_name = var,
+      week = week,
+      x_xlabel = var %in% c(x_var, xy_var),
+      y_ylabel = var %in% c(y_var, xy_var)
+    )
+    
   }
 }
 legend_label <- ggdraw() +

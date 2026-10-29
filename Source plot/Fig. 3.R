@@ -3,11 +3,11 @@ library(cowplot)
 library(ggbeeswarm)
 library(dplyr)
 
-load("Fig. 3.RData")
+load("fig3_itt.RData")
 
-###         ###
-### panel_a ###
-###         ###
+###          ###
+### subfig_a ###
+###          ###
 bar_a<-function(D, x_label=FALSE, legend=FALSE, y_label=FALSE){
   level_x <- c(
     "Low" = 1,
@@ -16,7 +16,7 @@ bar_a<-function(D, x_label=FALSE, legend=FALSE, y_label=FALSE){
     "Moderately\nhigh" = 10,
     "High" = 13
   )
-  
+
   D$xpos <- level_x[D$Level]
   size=0.5
   xlabel<-unique(D$Dimension)
@@ -55,29 +55,31 @@ bar_a<-function(D, x_label=FALSE, legend=FALSE, y_label=FALSE){
     theme(
       legend.title = element_blank(),
       legend.position = if (legend) "top" else "none",
-      legend.text = element_text(size = 22),  
-      legend.key.width  = unit(1.0, "cm"),    
+      legend.text = element_text(size = 22),
+      legend.key.width  = unit(1.0, "cm"),
       legend.key.height = unit(0.8, "cm"),
       panel.grid.major = element_blank(),
       panel.grid.minor = element_blank(),
       axis.text.x = if (x_label) element_text(size = 25, color = "black", vjust = 0.5) else element_blank(),
-      axis.ticks.x = element_line(color = "black", linewidth=size), 
+      axis.ticks.x = element_line(color = "black", linewidth=size),
       axis.ticks.length.x = unit(10, "pt"),
       axis.title.x = element_blank(),
       text = element_text(face = "plain"),
       axis.text.y = element_text(size = 30, color = "black", margin = margin(r=-15)),
-      axis.ticks.y = element_blank(), 
+      axis.ticks.y = element_blank(),
       axis.title.y = element_text(size = 24, color = "black",margin = margin(r=12)),
-      plot.margin = if (y_label) margin(t = 0, r = 5, b = 10, l = 5) else margin(t = 0, r = 5, b = 5, l = -30)
+      plot.margin = if (y_label) margin(t = 0, r = 5, b = 10, l = 5) else margin(t = 0, r = 5, b = 5, l = -30),
+      panel.background = element_rect(fill = "transparent", colour = NA),
+      plot.background = element_rect(fill = "transparent", colour = NA)
     )+
     annotate("text", x = 10-1.25, y = 800, label = xlabel,size = 10.5, hjust = 0)+
     annotate("text", x = 10, y = 450, label = "P < 0.001",size = 9.8)
-  
+
   if(legend){
     legend_all <- get_plot_component(p, "guide-box", return_all = TRUE)
     p <- ggdraw(legend_all[[4]])
   }
-  
+
   return(p)
 }
 
@@ -93,17 +95,17 @@ ap <- plot_grid(ay_lab,ap,ncol = 2,rel_widths = c(0.1, 1))
 ap_label <- bar_a(A_cog, legend = TRUE)
 
 
-###         ###
-### panel_b ###
-###         ###
+###          ###
+### subfig_b ###
+###          ###
 plot_b <- function(df_long, dim_name, show_x = FALSE, show_y = FALSE, show_legend = FALSE) {
   p <- ggplot(df_long, aes(x = ZheePal, y = Sel_report, fill = agreement)) +
     geom_tile() +
     geom_text(aes(label = Count), color = "black", size = 11) +
     scale_fill_manual(
       values = c(
-        "agreement"    = "#c99b38",   
-        "disagreement" = "#eddca5"    
+        "agreement"    = "#c99b38",   # Med brown
+        "disagreement" = "#eddca5"    # Light brown
       ),
       labels = c(
         "agreement"    = "Agreement    ",
@@ -132,10 +134,12 @@ plot_b <- function(df_long, dim_name, show_x = FALSE, show_y = FALSE, show_legen
       axis.title.y = element_blank(),
       panel.grid = element_blank(),
       text = element_text(face = "plain"),
-      plot.margin = if (show_y) margin(t = 5, r = -5, b = 0, l = 5) else margin(t = 5, r = 0, b = 0, l = 0)
+      plot.margin = if (show_y) margin(t = 5, r = -5, b = 0, l = 5) else margin(t = 5, r = 0, b = 0, l = 0),
+      panel.background = element_rect(fill = "transparent", colour = NA),
+      plot.background = element_rect(fill = "transparent", colour = NA)
     )
-  
-  
+
+
   if(show_legend){
     p <- p +
       guides(
@@ -148,7 +152,7 @@ plot_b <- function(df_long, dim_name, show_x = FALSE, show_y = FALSE, show_legen
     legend_only <- ggdraw(legend_all[[4]])
     return(legend_only)
   } else {
-    return(p)   
+    return(p)
   }
 }
 
@@ -167,13 +171,13 @@ bx_lab <- ggdraw() +draw_label("ZheePal",x = 0.6,size = 45,fontface = "plain")
 bp <- plot_grid(bp,bb_label_w, bx_lab,ncol = 1,rel_heights = c(1,0.03, 0.05))
 
 
-###         ###
-### panel_c ###
-###         ###
+###          ###
+### subfig_c ###
+###          ###
 plot_c <- function(df, legend=TRUE){
   df$group <- factor(
     df$group,
-    levels = c("ZheePal", "Usual")  
+    levels = c("ZheePal", "Usual")
   )
   p <- ggplot(
     df,
@@ -232,8 +236,8 @@ plot_c <- function(df, legend=TRUE){
     guides(
       color = guide_legend(
         override.aes = list(
-          size = 5,        
-          linewidth = 1.2  
+          size = 5,
+          linewidth = 1.2
         )
       )
     )+
@@ -247,16 +251,18 @@ plot_c <- function(df, legend=TRUE){
       axis.text.y = element_text(size = 39.5, color = "black", margin = margin(r= 23)),
       axis.text.x = element_text(size = 35, color = "black", margin = margin(t= 20)),
       legend.position = if (legend) "top" else "none",
-      legend.title = element_blank(),    
+      legend.title = element_blank(),
       legend.text = element_text(size = 22),
       legend.key.width = unit(1.8, "cm"),
-      plot.margin = margin(t = 0, r = 0, b = 0, l = 30)
+      plot.margin = margin(t = 0, r = 0, b = 0, l = 30),
+      panel.background = element_rect(fill = "transparent", colour = NA),
+      plot.background = element_rect(fill = "transparent", colour = NA)
     )
   if(legend){
     legend_all <- get_plot_component(p, "guide-box", return_all = TRUE)
     p <- ggdraw(legend_all[[4]])
   }
-  
+
   return(p)
 }
 cp_legend <- plot_c(C_df)
@@ -266,9 +272,9 @@ cp <- plot_c(C_df, legend = FALSE)
 cp <- plot_grid(cb_label_w, cy_lab,cb_label_w,cp,ncol = 4,rel_widths = c(0.1, 0.08, 0.04, 1))
 
 
-###         ###
-### panel_d ###
-###         ###
+###          ###
+### subfig_d ###
+###          ###
 geom_boxplot_pub <- function(
     data,
     mapping,
@@ -281,11 +287,11 @@ geom_boxplot_pub <- function(
     staplewidth = 0.2,
     ...
 ) {
-  
+
   x_var <- rlang::as_name(mapping$x)
   y_var <- rlang::as_name(mapping$y)
   half_staple <- staplewidth / 2
-  
+
   whisker_df <- data %>%
     group_by(.data[[x_var]]) %>%
     summarise(
@@ -298,7 +304,7 @@ geom_boxplot_pub <- function(
       ymax = max(.data[[y_var]][.data[[y_var]] <= upper], na.rm = TRUE),
       .groups = "drop"
     )
-  
+
   list(
     geom_boxplot(
       data = data,
@@ -313,7 +319,7 @@ geom_boxplot_pub <- function(
       fatten = median_fatten,
       ...
     ),
-    
+
     geom_segment(
       data = whisker_df,
       aes(
@@ -326,7 +332,7 @@ geom_boxplot_pub <- function(
       linewidth = whisker_linewidth,
       color = color
     ),
-    
+
     geom_segment(
       data = whisker_df,
       aes(
@@ -366,6 +372,8 @@ geom_boxplot_pub <- function(
   )
 }
 
+
+
 plot_p <- function(df, y_scale, x_label=FALSE) {
   y1 = y_scale$lim[1]
   y2 = y_scale$lim[2]
@@ -374,9 +382,9 @@ plot_p <- function(df, y_scale, x_label=FALSE) {
     geom_quasirandom(
       width = 0.18,
       alpha = 1,
-      shape = 21,          
-      fill = "grey95",     
-      color = "grey70",    
+      shape = 21,
+      fill = "grey95",
+      color = "grey70",
       stroke = 1,
       size = 5
     )+
@@ -387,7 +395,7 @@ plot_p <- function(df, y_scale, x_label=FALSE) {
       whisker_linewidth = 1,
       median_fatten = 1.0,
       color = "#00b0be",
-      
+
     ) +
     scale_y_continuous(breaks = y_scale$breaks) +
     coord_cartesian(ylim = y_scale$lim,clip = "off")+
@@ -436,7 +444,7 @@ plot_p <- function(df, y_scale, x_label=FALSE) {
     labs(title = df$Dem[1]) +
     theme_minimal() +
     theme(
-      axis.text.x = if (x_label) element_text(size = 23, color = "black", vjust = 0.5,margin = margin(t = 10)) else element_blank(), 
+      axis.text.x = if (x_label) element_text(size = 23, color = "black", vjust = 0.5,margin = margin(t = 10)) else element_blank(),
       plot.title = element_text(hjust = 0, size = 27.5, vjust=2.5),
       axis.text.y = element_text(size = 28, color = "black", margin = margin(r = 20)),
       axis.title.x = element_blank(),
@@ -444,9 +452,11 @@ plot_p <- function(df, y_scale, x_label=FALSE) {
       panel.grid.major = element_blank(),
       panel.grid.minor = element_blank(),
       axis.ticks.x = element_blank(),
-      axis.ticks.y = element_blank()
+      axis.ticks.y = element_blank(),
+      panel.background = element_rect(fill = "transparent", colour = NA),
+      plot.background = element_rect(fill = "transparent", colour = NA)
     )
-  
+
   return (p)
 }
 
@@ -465,9 +475,9 @@ dp <- plot_grid(dp,db_label_w,dx_lab,ncol = 1,rel_heights = c(1, 0.03, 0.05))
 dp <- dp + theme(plot.margin = margin(t = 5, l = 0, b = 0, r = 0))
 
 
-###         ###
-### panel_e ###
-###         ###
+###          ###
+### subfig_e ###
+###          ###
 ep <- ggplot(E_df_long, aes(x = Dimension, y = kappa, group = type)) +
   geom_line(
     aes(color = type),
@@ -489,8 +499,8 @@ ep <- ggplot(E_df_long, aes(x = Dimension, y = kappa, group = type)) +
   guides(
     color = guide_legend(
       override.aes = list(
-        linetype = "dashed",  
-        shape = c(15, 15),    
+        linetype = "dashed",
+        shape = c(15, 15),
         size = 3
       )
     )
@@ -524,8 +534,8 @@ ep <- ggplot(E_df_long, aes(x = Dimension, y = kappa, group = type)) +
   guides(
     color = guide_legend(
       override.aes = list(
-        size = 6,        
-        linewidth = 0   
+        size = 6,
+        linewidth = 0
       )
     )
   )+
@@ -539,18 +549,20 @@ ep <- ggplot(E_df_long, aes(x = Dimension, y = kappa, group = type)) +
     axis.line = element_blank(),
     axis.text.y = element_text(size = 35, color = "black", margin = margin(r= -5)),
     axis.text.x = element_text(size = 30, color = "black", margin = margin(t= 5), vjust=0.5),
-    legend.position = "top",           
-    legend.title = element_blank(),    
+    legend.position = "top",
+    legend.title = element_blank(),
     legend.text = element_text(size = 27),
     legend.key.width  = unit(0, "cm"),
     axis.title.y = element_text(size = 34, color = "black",margin = margin(r=35)),
-    legend.margin = margin(t = 0, b = 20)
+    legend.margin = margin(t = 0, b = 20),
+    panel.background = element_rect(fill = "transparent", colour = NA),
+    plot.background = element_rect(fill = "transparent", colour = NA)
   )
 
 
-###         ###
-### panel_f ###
-###         ###
+###          ###
+### subfig_f ###
+###          ###
 fp <- ggplot(F_df, aes(x = Reason, y = Proportion)) +
   geom_col(width = 0.82, fill = "#FAD8EC") +
   scale_y_continuous(
@@ -576,15 +588,18 @@ fp <- ggplot(F_df, aes(x = Reason, y = Proportion)) +
   theme_minimal() +
   theme(
     axis.text.x = element_text(size = 28, color = "black", margin = margin(t = 10),),
-    axis.text.y = element_text(size = 28, color = "black", margin = margin(r = -485), hjust = 0),
+    axis.text.y = element_blank(),
     legend.position = "none",
     panel.grid = element_blank(),
     axis.ticks.y = element_blank(),
     axis.title.y = element_blank(),
     axis.title.x = element_text(size = 28, color = "black",margin = margin(t=25)),
     axis.ticks.x = element_blank(),
-    plot.margin = margin(r = 50, t=80, l = 80, b = 15)
-  )
+    plot.margin = margin(r = 50, t=80, l = 80, b = 15),
+    panel.background = element_rect(fill = "transparent", colour = NA),
+    plot.background = element_rect(fill = "transparent", colour = NA)
+  )+
+  geom_text(aes(y = 2, label = Reason),hjust = 0,size = 9,color = "black")
 
 
 ggsave("plot/fig3/fig3a.pdf", plot = ap, width = 12, height = 11, device = cairo_pdf, family = "Aptos", bg = "transparent")
